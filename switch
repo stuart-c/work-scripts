@@ -1,0 +1,21 @@
+#!/bin/bash
+
+env=$1
+workspace=$1
+
+if [[ $workspace == *- ]]; then
+    workspace="default"
+    env=`echo $env | rev | cut -c 2- | rev`
+fi
+
+terraform workspace select $workspace
+
+if [ -e vars/$env.tfvars ]; then
+    rm -f env.auto.tfvars
+    ln -s vars/$env.tfvars env.auto.tfvars
+fi
+
+if [ -e vars/$env.secrets.tfvars ]; then
+    rm -f secrets.auto.tfvars
+    ln -s vars/$env.secrets.tfvars secrets.auto.tfvars
+fi

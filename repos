@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ORG=$1
+
+hub api orgs/$ORG/repos -t --paginate | grep '.full_name' | cut -f2 | cut -d/ -f2

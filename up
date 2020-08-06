@@ -1,0 +1,22 @@
+#!/bin/bash
+
+git all "pull --prune" 2>&1 | grep -v 'Already up to date.'
+git all prune-origin
+
+tidy=`git all show-tidy`
+
+IFS=$'\n'
+
+if [ "$tidy" != "" ]; then
+    echo "Branches to tidy:"
+
+    for item in $tidy; do
+        echo $item
+    done
+
+    read -p "Tidy? " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        git all tidy
+    fi
+fi

@@ -1,0 +1,3 @@
+#/bin/bash
+
+exec saml2aws login --skip-prompt --force

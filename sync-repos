@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for org in `ls $HOME/git`; do
+    for repo in `repos global-$org`; do
+        [[ -d "$HOME/git/$org/$repo" ]] || {
+            cd "$HOME/git/$org"
+            echo "global-$org - $repo"
+            hub clone "global-$org/$repo"
+        }
+    done
+done

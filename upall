@@ -1,0 +1,3 @@
+#/bin/bash
+
+ls | xargs -I{} bash -c "cd {};up"
