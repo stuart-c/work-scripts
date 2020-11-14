@@ -1,7 +1,7 @@
 SSH_ENV="$HOME/.ssh/environment"
 SSH_ALL=$(find $HOME/.ssh/id_* ! -name '*.pub' -prune)
 
-PATH="$HOME/bin:/Applications/VMware OVF Tool:$PATH"
+PATH="$HOME/bin:/Applications/VMware OVF Tool:/usr/local/opt/python@3.8/libexec/bin:$PATH"
 
 export PYTHONPATH="$HOME/Library/Python/3.7/lib/python/site-packages/"
  
