@@ -26,7 +26,7 @@ else
     start_agent;
 fi
 
-export KUBECONFIG=$(ls ~/.kube/kubeconfig_* | paste -sd ":" -)
+export KUBECONFIG=~/.kube/config
 
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
