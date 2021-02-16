@@ -10,12 +10,13 @@ fi
 
 terraform workspace select $workspace
 
+rm -f env.auto.tfvars
+rm -f secrets.auto.tfvars
+
 if [ -e vars/$env.tfvars ]; then
-    rm -f env.auto.tfvars
     ln -s vars/$env.tfvars env.auto.tfvars
 fi
 
 if [ -e vars/$env.secrets.tfvars ]; then
-    rm -f secrets.auto.tfvars
     ln -s vars/$env.secrets.tfvars secrets.auto.tfvars
 fi
