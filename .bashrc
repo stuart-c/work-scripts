@@ -49,3 +49,4 @@ export VAULT_ADDR="https://vault.shared.global.com"
 export CHEF_LICENSE="accept-no-persist"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export ANSIBLE_SCP_IF_SSH=true
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/lib
