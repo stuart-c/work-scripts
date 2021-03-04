@@ -2,6 +2,7 @@ SSH_ENV="$HOME/.ssh/environment"
 SSH_ALL=$(find $HOME/.ssh/id_* ! -name '*.pub' -prune)
 
 PATH="$HOME/bin:/Applications/VMware OVF Tool:/usr/local/opt/python@3.8/libexec/bin:$PATH"
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 export PYTHONPATH="$HOME/Library/Python/3.7/lib/python/site-packages/"
  
@@ -32,7 +33,6 @@ source ~/.git-completion.bash
 source ~/.git-prompt.sh
 
 GITHUB_TOKEN=`cat ~/.github-token`
-AWS_REGION="eu-west-1"
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -50,3 +50,4 @@ export CHEF_LICENSE="accept-no-persist"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export ANSIBLE_SCP_IF_SSH=true
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/lib
+export AWS_REGION=eu-west-1
