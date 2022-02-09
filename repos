@@ -2,4 +2,4 @@
 
 ORG=$1
 
-hub api orgs/$ORG/repos -t --paginate | grep '.full_name' | cut -f2 | cut -d/ -f2
+gh repo list $1 --no-archived --json name --limit 300 | jq --raw-output '.[].name'

@@ -1,11 +1,14 @@
 #!/bin/bash
 
 for org in `ls $HOME/git`; do
-    for repo in `repos global-$org`; do
+    echo $org
+    repos=`repos global-$org`
+    for repo in $repos; do
         [[ -d "$HOME/git/$org/$repo" ]] || {
             cd "$HOME/git/$org"
             echo "global-$org - $repo"
             hub clone "global-$org/$repo"
         }
     done
+    diff <(basename `find "$HOME/git/$org" -depth 1 -type d` | sort) <(echo "$repos" | sort) | grep '<' | grep -v '^\.$'
 done
