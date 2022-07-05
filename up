@@ -8,7 +8,7 @@ tidy=`git all show-tidy`
 IFS=$'\n'
 
 if [ "$tidy" != "" ]; then
-    echo "Branches to tidy:"
+    echo "Branches to tidy for `pwd`:"
 
     for item in $tidy; do
         echo $item
