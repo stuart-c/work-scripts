@@ -1,0 +1,51 @@
+# Oh My Zsh
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# Git prompt
+source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
+PROMPT='$(git_super_status) '$PROMPT
+
+# Kubernetes prompt
+source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+PROMPT='$(kube_ps1) '$PROMPT
+
+source "/opt/homebrew/share/zsh/site-functions"
+
+# Auth0 credentials
+set -a; source ~/.env.auth0; set +a
+
+autoload -Uz compinit && compinit
+
+# Terragrunt caching
+export TG_PROVIDER_CACHE=1
+export TG_DOWNLOAD_DIR="$HOME/.cache/terragrunt/downloads"
+
+# AWS profile switcher
+alias awsd="source _awsd"
+export AWS_PROFILE=$(cat ~/.awsd)
+local aws_info='$(aws_prof)'
+function aws_prof {
+    local profile="${AWS_PROFILE:=}"
+    echo -n "%{$fg_bold[blue]%}aws:(%{$fg[cyan]%}${profile}%{$fg_bold[blue]%})%{$reset_color%} "
+}
+[ "$BASH_VERSION" ] && AWSD_CMD="awsd" || AWSD_CMD="_awsd"
+_awsd_completion() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local suggestions=$(awsd list)
+    COMPREPLY=($(compgen -W "$suggestions" -- $cur))
+    return 0
+}
+#complete -o nospace -F _awsd_completion "${AWSD_CMD}"
+
+# Prompt
+PROMPT='$(aws_prof)'$PROMPT
+
+# Aliases
+alias python='python3'
+alias saml='saml2aws login --skip-prompt --role=arn:aws:iam::157380443357:role/reedai-admin'
+alias tunnel='bash ~/github/reed-ai-technology/rai-infra/scripts/multi-tunnel.sh --profile dev --prod-profile prod'
+alias upall='find ~/github -type d -mindepth 2 -maxdepth 2 | xargs -I{} bash -c "cd {};git pull --prune"'
